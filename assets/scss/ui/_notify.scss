@@ -1,0 +1,108 @@
+// style of the notification itself
+.notify {
+  position: relative;
+  padding: 0.8rem 0.8rem;
+  margin: 0.5rem;
+  margin-bottom: 0;
+  border-radius: 4px;
+  box-shadow: rgba(35, 46, 60, 0.16) 0 2px 16px 0;
+
+  box-shadow: rgba(35, 46, 60, 0.04) 0 2px 4px 0;
+  //border: 1px solid rgba(101, 109, 119, 0.16);
+  border-radius: 0px 4px 4px 0px;
+  background-color: #fff !important;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    height: 100%;
+    z-index: 1;
+    //border-radius: 4px 0 0 4px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    //border-radius: 4px 0 0 4px;
+  }
+
+  .notification-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: $white;
+    z-index: 1;
+    position: relative;
+  }
+
+  // style for content
+  .notification-content {
+    color: $white;
+    z-index: 1;
+    position: relative;
+  }
+
+  // additional styling hook when using`type` parameter, i.e. this.$notify({ type: 'success', message: 'Yay!' })
+  &.success {
+    &:after {
+      background-color: $green;
+    }
+
+    &:before {
+      background-color: rgba($green, .8) !important;
+    }
+  }
+
+  &.info {
+    box-shadow: rgba(35, 46, 60, 0.04) 0 2px 8px 0;
+    border: 1px solid rgba(101, 109, 119, 0.16);
+    border-left: none;
+    &:after {
+      background-color: $blue;
+    }
+
+    &:before {
+      background-color: #fff !important;
+    }
+    .notification-title, .notification-content {
+        color: $dark;
+    }
+  }
+
+  &.warn {
+    &:after {
+      background-color: $yellow;
+    }
+
+    &:before {
+      background-color: rgba($yellow, .8) !important;
+    }
+  }
+
+  &.error {
+    &:after {
+        background-color: $red;
+      }
+  
+      &:before {
+        background-color: rgba($red, .8) !important;
+      }
+  }
+}
+
+/*
+    $primary: $blue !default;
+    $secondary: $text-muted !default;
+    $success: $green !default;
+    $info: $azure !default;
+    $warning: $orange !default;
+    $danger: $red !default;
+*/

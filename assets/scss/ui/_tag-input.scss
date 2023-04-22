@@ -1,0 +1,46 @@
+.tag-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #dadcde;
+    background-color: #f4f6fa;
+    border-radius: 4px;
+    font-size: 0.9em;
+    box-sizing: border-box;
+    padding: 0 0.75rem;
+}
+
+.tag-input__tag {
+    display: flex;
+    flex-direction: row;
+    height: subtract($input-height, 4px);
+    float: left;
+    margin-right: 0.75rem;
+    background-color: #fff;
+    border: 1px solid #dadcde;
+    margin-top: 11px;
+    line-height: subtract($input-height, 4px);
+    //padding: 0 5px;
+    border-radius: 5px;
+}
+.tag-input__close {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #dadcde;
+    width: 30px;
+}
+.tag-input__name {
+    padding: 0 10px;
+}
+
+.tag-input__text {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 8px 0;
+    font-size: $h4-font-size;
+}
+//height: subtract($input-height, 1px);
+//margin: 0 (-$input-padding-x) 0 0;
