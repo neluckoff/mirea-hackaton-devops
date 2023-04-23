@@ -5,7 +5,7 @@
                 <div class="page-header d-print-none">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h2 class="page-title">Список кредитных агентов</h2>
+                            <h2 class="page-title">Список кредитных агентов по точкам</h2>
                         </div>
                     </div>
                 </div>
@@ -25,21 +25,6 @@
                                         </div>строк
                                     </div>
                                     <div class="ms-auto text-muted">
-                                        <nuxt-link to="creditors/points">
-                                            <button type="button" class="btn btn-green">
-                                                    Связь точек и агентов
-                                            </button>
-                                        </nuxt-link>
-                                        <nuxt-link to="creditors/add">
-                                            <button type="button" class="btn btn-green">
-                                                    Добавить агента
-                                            </button>
-                                        </nuxt-link>
-                                        <nuxt-link to="creditors/new-point">
-                                            <button type="button" class="btn btn-green">
-                                                    Привязать точку
-                                            </button>
-                                        </nuxt-link>
                                     </div>
                                 </div>
                             </div>
@@ -51,8 +36,8 @@
                                                 <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices" />
                                             </th>
                                             <th class="w-1">ID.</th>
-                                            <th>ФИО</th>
-                                            <th>Почта</th>
+                                            <th>Кредитор</th>
+                                            <th>Точка</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -65,11 +50,11 @@
                                                 <span class="text-muted">{{item.id}}</span>
                                             </td>
                                             <td>
-                                                <a href="invoice.html" class="text-reset" tabindex="-1">{{ item.full_name }}</a>
+                                                <a href="invoice.html" class="text-reset" tabindex="-1">{{ item.agent.full_name }} ({{item.agent.email}})</a>
                                             </td>
                                             <td>
                                                 <span class="flag flag-country-pl"></span>
-                                                {{ item.email }}
+                                                {{ item.sale_point.name }} ({{ item.sale_point.address }})
                                             </td>
                                             <td class="text-end">
                                                 <button type="button" class="btn btn-red" @click="delStore(item.id)">Удалить</button>
@@ -105,14 +90,11 @@ export default {
         }
     },
     methods: {
-        setActive() {
-            this.activeShow = !this.activeShow
-        },
         async fetchStores() {
             try {
 				if (!this.add) {
 					let response = await this.$axios.$get(
-						`/api/agents/?page_size=${this.pageSize}`,
+						`/api/accesses/`,
 						{}
 					);
                     console.log(response)
@@ -128,7 +110,7 @@ export default {
             try {
 				if (!this.add) {
 					let response = await this.$axios.$delete(
-						`/api/agents/${id}/`,
+						`/api/accesses/${id}/`,
 						{}
 					);
 				}
