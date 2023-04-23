@@ -148,3 +148,18 @@
         </div>
     </main>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            activeShow: false
+        }
+    },
+    methods: {
+        setActive() {
+            this.activeShow = !this.activeShow
+        }
+    }
+}
+</script>

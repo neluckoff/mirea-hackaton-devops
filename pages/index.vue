@@ -52,7 +52,7 @@
 
                             <div class="card-footer">
                                 <div class="d-flex center">
-                                    <button type="button" class="btn" :class="{'btn-primary': add, 'btn-green': !add}">btnName(add)</button>
+                                    <!-- <button type="button" class="btn" :class="{'btn-primary': add, 'btn-green': !add}">btnName(add)</button> -->
                                     <button type="button" class="btn btn-danger ms-auto" >Выйти</button> <!--@click="$auth.logout()"-->
                                 </div>
                             </div>

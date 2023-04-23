@@ -4,22 +4,18 @@
           <div class="container-tight py-4">
               <div class="text-center mb-4">
                   <nuxt-link to="/">
-                      <img src="/logo.svg" height="36" alt />
+                      <!-- <img src="/logo.svg" height="36" alt /> -->
                   </nuxt-link>
               </div>
-              <form class="card card-md"> <!--@submit.prevent="submitForm"-->
+              <form class="card card-md" @submit.prevent="submitForm">
                   <div class="card-body">
-                      <!--<h2 class="card-title text-center mb-4">Авторизация</h2>-->
                       <div class="mb-3">
-                          <label class="form-label">Логин</label>
-                          <input type="text" class="form-control" placeholder="Введите свой логин" v-model="data.username" required />
+                          <label class="form-label">Почта</label>
+                          <input type="text" class="form-control" placeholder="Введите свой Email" v-model="data.email" required />
                       </div>
                       <div class="mb-2">
                           <label class="form-label">
                               Пароль
-                              <span class="form-label-description">
-                                  <nuxt-link to="/forgot-password">Я забыл пароль</nuxt-link>
-                              </span>
                           </label>
                           <div class="input-group input-group-flat">
                               <input type="password" class="form-control" placeholder="Введите пароль" autocomplete="off" v-model="data.password" required />
@@ -51,44 +47,32 @@
 </template>
 <script>
 export default {
-  data() {
+    layout: 'clear',
+    data() {
       return {
           page: {
               title: 'Авторизация'
           },
           data: {
-              username: "",
-              password: "",
+              email: "admin@admin.ru",
+              password: "SuPeR_StRoNg_PaSs",
           },
       };
   },
   methods: {
-      // async submitForm() {
-      //     try {
-      //         let response = await this.$auth.loginWith("local", {
-      //             data: this.data,
-      //         });
-      //         console.log(response);
-      //     } catch (e) {
-      //         if(e.response.status == 400) {
-      //             this.$notify({
-      //                 title: this.page.title,
-      //                 text: e.response.data.message,
-      //                 type: "error",
-      //                 duration: 3000,
-      //                 speed: 200,
-      //             });
-      //         } else {
-      //             this.$notify({
-      //                 title: "Системная ошибка",
-      //                 text: e,
-      //                 type: "error",
-      //                 duration: 5000,
-      //                 speed: 200,
-      //             });
-      //         }
-      //     }
-      // },
+    // async submitForm() {
+    //     await this.$store.dispatch('auth/fetchUserToken', {login: data.email, password: data.password})
+    // }
+    async submitForm() {
+        try {
+            let response = await this.$auth.loginWith("local", {
+                data: this.data,
+            });
+            console.log(response);
+        } catch (e) {
+            console.log(e)
+        }
+    },
   },
 };
 </script>

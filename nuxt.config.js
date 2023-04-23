@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'hack-mirea',
+    title: 'МИРЭА Хакатон',
     htmlAttrs: {
       lang: 'en'
     },
@@ -40,12 +40,61 @@ export default {
     // https://go.nuxtjs.dev/axios
     ['@nuxtjs/axios'],
     ['@nuxtjs/style-resources'],
+    ['@nuxtjs/auth-next']
   ],
+
+  auth: {
+    redirect: {
+        callback: '/callback',
+        logout: '/login?message=logout'
+    },
+    strategies: {
+      local: {
+          token: {
+              property: 'access'
+          },
+          user: {
+              property: '',
+          },
+          endpoints: {
+              login: { url: '/api/auth/login', method: 'post' },
+              logout: { url: '/api/v1/profile/logout', method: 'post' },
+              user: { url: '/api/auth/profile', method: 'get' }
+          }
+      },
+      localRefresh: {
+        scheme: 'refresh',
+        token: {
+            property: 'token.accessToken',
+            maxAge: 15
+        },
+        refreshToken: {
+            property: 'token.refreshToken',
+            data: 'refreshToken',
+            maxAge: false
+        }
+      },
+    }
+  },
+
+  router: {
+    middleware: ['auth']//,'api']
+    //middleware: 'skeleton'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    prefix: '/api',
+    proxy: true,
+  },
+  
+  proxy: {
+      '/api': {
+          target: 'http://95.140.156.192:8000',
+          pathRewrite: { '^/api/': '' },
+          headers: { 'X-Api-Key': '' },
+          logLevel: 'debug',
+      },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

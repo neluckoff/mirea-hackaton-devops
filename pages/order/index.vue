@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label required">Номер телефона клиента</label>
-                                    <input type="text" name="input-mask" class="form-control" data-mask="0 (000) 000-00-00" data-mask-visible="true" placeholder="7 (999) 999-00-00" autocomplete="off">
+                                    <input type="tel" name="input-mask" class="form-control" v-mask="'+7 (###) ###-##-##'" placeholder="+7 (999) 999-00-00" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-label required">Выберите категорию товара</div>

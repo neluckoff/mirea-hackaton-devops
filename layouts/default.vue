@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <notifications animation-type="velocity" :animation="animation" position="top right" classes="notify" />
+        <!-- <notifications animation-type="velocity" :animation="animation" position="top right" classes="notify" /> -->
         <side-bar ></side-bar>
         <div class="page-wrapper">
             <Nuxt />
@@ -27,25 +27,10 @@ export default {
                 },
             };
         },
-        // logged() {
-        //     return this.$store.state.settings.profile.logged;
-        // },
+        logged() {
+            return this.$store.state.settings.profile.logged;
+        },
     },
-    methods: {
-        // async getFilter() {
-        //     let filterUserOnly = this.$auth.$storage.getCookie("userOnly");
-        //     if(typeof filterUserOnly != 'undefined') {
-        //         this.$store.commit("settings/setFilterUserOnly", filterUserOnly);
-        //     }
-        //     let filterCardList = this.$auth.$storage.getCookie("cardList");
-        //     if(typeof filterCardList != 'undefined') {
-        //         this.$store.commit("settings/setFilterCardList", filterCardList);
-        //     }
-        // }
-    },
-    created() {
-        // this.getFilter()
-    }
 };
 </script>
 
