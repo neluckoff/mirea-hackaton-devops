@@ -5,7 +5,7 @@
                 <div class="page-header d-print-none">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h2 class="page-title">Список заказов</h2>
+                            <h2 class="page-title">Список категорий товаров</h2>
                         </div>
                     </div>
                 </div>
@@ -25,9 +25,9 @@
                                         </div>строк
                                     </div>
                                     <div class="ms-auto text-muted">
-                                        <nuxt-link to="order/add">
+                                        <nuxt-link to="categories/add">
                                             <button type="button" class="btn btn-green">
-                                                Оформить заказ
+                                                    Добавить категорию
                                             </button>
                                         </nuxt-link>
                                     </div>
@@ -41,9 +41,7 @@
                                                 <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices" />
                                             </th>
                                             <th class="w-1">ID.</th>
-                                            <th>Номер телефона</th>
-                                            <th>Способ оплаты</th>
-                                            <th>Стоимость</th>
+                                            <th>Название категории</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -56,13 +54,7 @@
                                                 <span class="text-muted">{{item.id}}</span>
                                             </td>
                                             <td>
-                                                <span class="text-muted">{{item.telephone_number}}</span>
-                                            </td>
-                                            <td>
-                                                <span class="text-muted">{{item.payment_method}}</span>
-                                            </td>
-                                            <td>
-                                                <span class="text-muted">{{item.fee}}</span>
+                                                <span class="text-muted">{{item.name}}</span>
                                             </td>
                                             <td class="text-end">
                                                 <button type="button" class="btn btn-red" @click="delStore(item.id)">Удалить</button>
@@ -105,7 +97,7 @@ export default {
             try {
 				if (!this.add) {
 					let response = await this.$axios.$get(
-						`/api/credits/?page_size=${this.pageSize}`,
+						`/api/item-categories/?page_size=${this.pageSize}`,
 						{}
 					);
                     console.log(response)
@@ -121,7 +113,7 @@ export default {
             try {
 				if (!this.add) {
 					let response = await this.$axios.$delete(
-						`/api/credits/${id}/`,
+						`/api/item-categories/${id}/`,
 						{}
 					);
 				}

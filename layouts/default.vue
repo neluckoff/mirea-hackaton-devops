@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <!-- <notifications animation-type="velocity" :animation="animation" position="top right" classes="notify" /> -->
+        <notifications animation-type="velocity" :animation="animation" position="top right" classes="notify" />
         <side-bar ></side-bar>
         <div class="page-wrapper">
             <Nuxt />
@@ -28,7 +28,7 @@ export default {
             };
         },
         logged() {
-            return this.$store.state.settings.profile.logged;
+            return this.$auth.user;
         },
     },
 };

@@ -1,6 +1,10 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  server: {
+    host: '0.0.0.0', // default: localhost
+    port: process.env.PORT || 3000
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -26,6 +30,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/notifications-client', ssr: false },
+    { src: '~plugins/functions.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +64,7 @@ export default {
           },
           endpoints: {
               login: { url: '/api/auth/login', method: 'post' },
-              logout: { url: '/api/v1/profile/logout', method: 'post' },
+              logout: { url: '/api/auth/logout', method: 'post' },
               user: { url: '/api/auth/profile', method: 'get' }
           }
       },
@@ -78,8 +84,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth']//,'api']
-    //middleware: 'skeleton'
+    middleware: ['auth']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -93,7 +98,7 @@ export default {
           target: 'http://95.140.156.192:8000',
           pathRewrite: { '^/api/': '' },
           headers: { 'X-Api-Key': '' },
-          logLevel: 'debug',
+          // logLevel: 'debug',
       },
   },
 

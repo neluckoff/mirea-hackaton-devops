@@ -16,17 +16,21 @@
             <div class="container-fluid">
                 <div class="row row-cards">
                     <div class="col-12">
-                        <form class="card">
+                        <form class="card" >
                             <div class="card-body border-bottom py-3">
                                 <div class="mb-3">
                                     <label class="form-label required">Название магазина</label>
-                                    <input type="text" class="form-control" autocomplete="off">
+                                    <input type="text" class="form-control" autocomplete="off" v-model="data.name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required">Описание магазина</label>
+                                    <input type="text" class="form-control" autocomplete="off" v-model="data.description">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label required">Код магазина</label>
-                                    <input type="number" class="form-control" autocomplete="off">
+                                    <input type="number" class="form-control" autocomplete="off" v-model="data.slug">
                                 </div>
-                                <button type="button" class="btn btn-green">
+                                <button type="button" class="btn btn-green" @click="submitForm">
                                     Добавить магазин
                                 </button>
                             </div>
@@ -37,6 +41,47 @@
         </div>
     </main>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            data: {
+                slug: "",
+                name: "",
+                description: ""
+            }
+        }
+    },
+    methods: {
+        async submitForm() {
+            try {
+                let response = await this.$axios.post(
+                    `/api/stores/`,
+                    this.data,
+                );
+                this.data = response;
+                this.$notify({
+                    title: "Добавлено",
+                    text: "Успешно обновлено",
+                    type: "success",
+                    duration: 3000,
+                    speed: 200,
+                });
+            } catch (e) {
+                console.log(e);
+                this.$notify({
+                    title: "Системная ошибка",
+                    text: e,
+                    type: "error",
+                    duration: 5000,
+                    speed: 200,
+                });
+            }
+        },
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .btn {

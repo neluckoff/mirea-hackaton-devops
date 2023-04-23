@@ -4,7 +4,7 @@
           <div class="container-tight py-4">
               <div class="text-center mb-4">
                   <nuxt-link to="/">
-                      <!-- <img src="/logo.svg" height="36" alt /> -->
+                      <img src="/logo.svg" height="36" alt />
                   </nuxt-link>
               </div>
               <form class="card card-md" @submit.prevent="submitForm">
@@ -68,7 +68,7 @@ export default {
             let response = await this.$auth.loginWith("local", {
                 data: this.data,
             });
-            console.log(response);
+            console.log(response)
         } catch (e) {
             console.log(e)
         }
